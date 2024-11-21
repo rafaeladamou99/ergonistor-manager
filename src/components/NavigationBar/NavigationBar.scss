@@ -1,0 +1,14 @@
+.app-bar {
+    .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+  .menu-items {
+    transition: scale 100ms ease-in-out;
+  }
+  .menu-items:hover {
+    scale: 1.1;
+  }
+}
