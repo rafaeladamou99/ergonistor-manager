@@ -9,7 +9,7 @@ import { ServiceProject } from "../../types/types"
 import useSnackbar from "../../snackbar/useSnackbar"
 
 export interface ServicesProjectsProps {
-  type: "service" | "project"
+  type: "service" | "project" | "service-categories"
 }
 const ServicesProjects = ({ type }: ServicesProjectsProps) => {
   const [isModalOpen, setIsModalOpen] = useState<string | false>(false)
@@ -66,7 +66,8 @@ const ServicesProjects = ({ type }: ServicesProjectsProps) => {
     <div className="flex flex-col gap-6 items-center py-4">
       <span className="text-4xl font-semibold">
         {type[0].toUpperCase()}
-        {type.slice(1)}s
+        {type.slice(1)}
+        {type !== "service-categories" ? "s" : ""}
       </span>
       <div className="w-full h-full flex items-center justify-center p-10 gap-4 flex-wrap">
         {data.map(({ title, _id }, index) => (

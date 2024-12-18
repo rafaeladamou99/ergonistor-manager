@@ -1,3 +1,4 @@
+import { CircularProgress } from "@mui/material"
 import MuiButton from "@mui/material/Button"
 import { useMemo } from "react"
 
@@ -6,6 +7,7 @@ export type ButtonType = "primary" | "secondary" | "tertiary"
 export type ButtonProps = {
   label: string
   type?: ButtonType
+  isLoading?: boolean
 } & (
   | {
       onClick: () => void
@@ -20,7 +22,8 @@ const Button = ({
   label,
   type = "primary",
   onClick,
-  isSubmit = false
+  isSubmit = false,
+  isLoading = false
 }: ButtonProps) => {
   const variant = useMemo((): "text" | "contained" | "outlined" => {
     switch (type) {
@@ -41,6 +44,10 @@ const Button = ({
       onClick={onClick}
       type={isSubmit ? "submit" : undefined}
       className="w-fit"
+      disabled={isLoading}
+      startIcon={
+        isLoading ? <CircularProgress className="!h-6 !w-6" /> : undefined
+      }
     >
       {label}
     </MuiButton>

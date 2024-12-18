@@ -1,3 +1,5 @@
+import { FileType } from "../components/FileUpload/FileUpload"
+
 export interface onChangeType<T> {
   name: string
   value: T
@@ -66,19 +68,26 @@ export interface ContentResponse extends ContentPayload {
   _id: string
 }
 
-export interface ServicePayload {
-  title: string
-  paragraphs: string[]
-  img: string
-}
-
 export interface ServiceProjectPayload {
   title: string
   paragraphs: string[]
-  img: string
+  img1: undefined | FileType | string
+  img2: undefined | FileType | string
+  img3: undefined | FileType | string
+  img4: undefined | FileType | string
+  img5: undefined | FileType | string
+  category?: string
+  architect?: string
+  status?: string
 }
 
-export interface Service extends ServicePayload {
+export interface ServiceCategoryPayload {
+  title: string
+  description: string
+  img: undefined | FileType | string
+}
+
+export interface ServiceCategory extends ServiceCategoryPayload {
   _id: string
 }
 export interface ServiceProject extends ServiceProjectPayload {

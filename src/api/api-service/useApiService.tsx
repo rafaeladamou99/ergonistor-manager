@@ -2,8 +2,7 @@ import { useState, useEffect, useCallback } from "react"
 import axios, { AxiosError, AxiosRequestConfig, Method } from "axios"
 import useAxiosConfig from "./useAxiosConfig"
 
-interface UseApiResponse<TData = undefined, TPayload = undefined> {
-  data: TData | null
+type UseApiResponse<TData = undefined, TPayload = undefined> = {
   isLoading: boolean
   error: string | null
   get: () => Promise<void>
@@ -11,9 +10,8 @@ interface UseApiResponse<TData = undefined, TPayload = undefined> {
   put: (body: any) => Promise<void>
   patch: (body: any) => Promise<void>
   del: () => Promise<void>
-  isSuccess: boolean
   isError: boolean
-}
+} & ({ data: null; isSuccess: false } | { data: TData; isSuccess: true })
 
 const useApi = <TData = undefined, TPayload = undefined>(
   url: string
@@ -81,8 +79,15 @@ const useApi = <TData = undefined, TPayload = undefined>(
     await makeRequest("DELETE")
   }, [makeRequest])
 
+  const dataAndIsSuccess:
+    | { data: TData; isSuccess: true }
+    | { data: null; isSuccess: false } =
+    data && isSuccess && !isLoading
+      ? { data, isSuccess: true }
+      : { data: null, isSuccess: false }
+
   return {
-    data,
+    ...dataAndIsSuccess,
     isLoading,
     error,
     get,
@@ -90,7 +95,6 @@ const useApi = <TData = undefined, TPayload = undefined>(
     put,
     patch,
     del,
-    isSuccess: isSuccess && !isLoading,
     isError: isError && !isLoading
   }
 }

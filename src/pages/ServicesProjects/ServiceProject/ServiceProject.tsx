@@ -1,19 +1,28 @@
-import React from "react"
+import { faTrash } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Button from "../../../components/Button/Button"
+import FileUpload from "../../../components/FileUpload/FileUpload"
 import TextField from "../../../components/TextField/TextField"
 import useServiceProject from "./useServiceProject"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTrash } from "@fortawesome/free-solid-svg-icons"
-import { ServicesProjectsProps } from "../ServicesProjects"
+import Dropdown from "../../../components/Dropdown/Dropdown"
 
-const ServiceProject = ({ type }: ServicesProjectsProps) => {
+export interface ServicesProjectProps {
+  type: "service" | "project"
+}
+
+const ServiceProject = ({ type }: ServicesProjectProps) => {
   const {
     onSubmit,
     formik,
     onChangeString,
     formId,
     removeParagraph,
-    addParagraph
+    addParagraph,
+    onChangeImg,
+    removeImg,
+    isLoading,
+    serviceCategoriesOptions,
+    onChangeCategory
   } = useServiceProject(type)
 
   return (
@@ -35,14 +44,91 @@ const ServiceProject = ({ type }: ServicesProjectsProps) => {
             errorMsg={formik.errors.title}
             value={formik.values.title}
           />
-          <TextField
-            name="img"
-            onChange={onChangeString}
-            label="Image"
-            hasError={!!formik.errors.img && formik.touched.img}
-            errorMsg={formik.errors.img}
-            value={formik.values.img}
-          />
+          <div className="flex gap-2 items-center">
+            <FileUpload
+              label="Image"
+              onChange={onChangeImg}
+              name="img1"
+              value={formik.values.img1}
+              errorMsg={formik.errors.img1}
+              hasError={!!formik.errors.img1}
+            />
+            {typeof formik.values.img1 === "string" && (
+              <FontAwesomeIcon
+                icon={faTrash}
+                onClick={removeImg("img1")}
+                className="cursor-pointer hover:text-red-700"
+              />
+            )}
+          </div>
+          <div className="flex gap-2 items-center">
+            <FileUpload
+              label="Image"
+              onChange={onChangeImg}
+              name="img2"
+              value={formik.values.img2}
+              errorMsg={formik.errors.img2}
+              hasError={!!formik.errors.img2}
+            />
+            {typeof formik.values.img2 === "string" && (
+              <FontAwesomeIcon
+                icon={faTrash}
+                onClick={removeImg("img2")}
+                className="cursor-pointer hover:text-red-700"
+              />
+            )}
+          </div>
+          <div className="flex gap-2 items-center">
+            <FileUpload
+              label="Image"
+              onChange={onChangeImg}
+              name="img3"
+              value={formik.values.img3}
+              errorMsg={formik.errors.img3}
+              hasError={!!formik.errors.img3}
+            />
+            {typeof formik.values.img3 === "string" && (
+              <FontAwesomeIcon
+                icon={faTrash}
+                onClick={removeImg("img3")}
+                className="cursor-pointer hover:text-red-700"
+              />
+            )}
+          </div>
+          <div className="flex gap-2 items-center">
+            <FileUpload
+              label="Image"
+              onChange={onChangeImg}
+              name="img4"
+              value={formik.values.img4}
+              errorMsg={formik.errors.img4}
+              hasError={!!formik.errors.img4}
+            />
+            {typeof formik.values.img4 === "string" && (
+              <FontAwesomeIcon
+                icon={faTrash}
+                onClick={removeImg("img4")}
+                className="cursor-pointer hover:text-red-700"
+              />
+            )}
+          </div>
+          <div className="flex gap-2 items-center">
+            <FileUpload
+              label="Image"
+              onChange={onChangeImg}
+              name="img5"
+              value={formik.values.img5}
+              errorMsg={formik.errors.img5}
+              hasError={!!formik.errors.img5}
+            />
+            {typeof formik.values.img5 === "string" && (
+              <FontAwesomeIcon
+                icon={faTrash}
+                onClick={removeImg("img5")}
+                className="cursor-pointer hover:text-red-700"
+              />
+            )}
+          </div>
           {formik.values.paragraphs.map((paragraph, index) => (
             <div className="flex gap-2 items-center">
               <TextField
@@ -64,8 +150,41 @@ const ServiceProject = ({ type }: ServicesProjectsProps) => {
             </div>
           ))}
           <Button label="Add Paragraph" onClick={addParagraph} />
+          {!!serviceCategoriesOptions.length && (
+            <Dropdown
+              label="Category"
+              name="category"
+              onChange={onChangeCategory}
+              options={serviceCategoriesOptions}
+              value={serviceCategoriesOptions.find(
+                (option) => option.value === formik.values.category
+              )}
+              errorMsg={formik.errors.category}
+              hasError={!!formik.errors.category}
+            />
+          )}
+          {type === "project" && (
+            <>
+              <TextField
+                name="architect"
+                onChange={onChangeString}
+                label="Architect"
+                hasError={!!formik.errors.architect && formik.touched.architect}
+                errorMsg={formik.errors.architect}
+                value={formik.values.architect}
+              />
+              <TextField
+                name="status"
+                onChange={onChangeString}
+                label="Status"
+                hasError={!!formik.errors.status && formik.touched.status}
+                errorMsg={formik.errors.status}
+                value={formik.values.status}
+              />
+            </>
+          )}
         </div>
-        <Button label="Save" isSubmit />
+        <Button label="Save" isSubmit isLoading={isLoading} />
       </form>
     </div>
   )

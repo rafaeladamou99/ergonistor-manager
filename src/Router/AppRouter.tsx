@@ -13,6 +13,7 @@ import InverseProtectedRoute from "./InverseProtectedRoute"
 import ProtectedRoute from "./ProtectedRoute"
 import Root from "./Root"
 import { Routes } from "./Routes"
+import ServiceCategory from "../pages/ServicesProjects/ServiceCategory/ServiceCategory"
 
 const AppRouter = () => {
   const {
@@ -80,6 +81,23 @@ const AppRouter = () => {
             {
               path: Routes.Projects.EditProject.routerPath,
               element: <ServiceProject key="project" type="project" />
+            },
+            {
+              path: Routes.ServicesCategories.path,
+              element: (
+                <ServicesProjects
+                  key="service-categories"
+                  type="service-categories"
+                />
+              )
+            },
+            {
+              path: Routes.ServicesCategories.AddServiceCategory.path,
+              element: <ServiceCategory key="service-categories" />
+            },
+            {
+              path: Routes.ServicesCategories.EditServiceCategory.routerPath,
+              element: <ServiceCategory key="service-categories" />
             },
             {
               path: "/",

@@ -21,7 +21,12 @@ import "./NavigationBar.scss"
 const NavigationBar = () => {
   const { dispatch } = useAuth()
   const pages = useMemo(
-    () => [Routes.Services, Routes.Projects, Routes.Contents],
+    () => [
+      Routes.ServicesCategories,
+      Routes.Services,
+      Routes.Projects,
+      Routes.Contents
+    ],
     []
   )
   const navigate = useNavigate()
