@@ -1,21 +1,14 @@
-import { useParams } from "react-router-dom"
-import useApi from "../../../api/api-service/useApiService"
-import { ContentResponse } from "../../../types/types"
-import { FormEvent, useEffect } from "react"
-import useContent from "./useContent"
-import TextField from "../../../components/TextField/TextField"
-import Button from "../../../components/Button/Button"
-import { FormikErrors } from "formik"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { FormControlLabel, Switch } from "@mui/material"
+import Button from "../../../components/Button/Button"
+import TextField from "../../../components/TextField/TextField"
+import useContent from "./useContent"
 
 const Content = () => {
   const {
     onSubmit,
-    formik,
     onChangeString,
-    formId,
     addFaqQuestion,
     addFaqQuestionParagraph,
     addPerson,
@@ -29,7 +22,9 @@ const Content = () => {
     removePerson,
     removeSection,
     onIsPrimaryChange,
-    isEdit
+    isEdit,
+    formik,
+    formId
   } = useContent()
 
   return (

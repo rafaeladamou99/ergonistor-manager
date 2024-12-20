@@ -26,6 +26,10 @@ export const Routes = {
       path: "/services/add"
     }
   },
+  SliderLogo: {
+    name: "Slider and Logo",
+    path: "/slider-logo"
+  },
   Projects: {
     name: "Projects",
     path: "/projects",

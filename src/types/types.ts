@@ -103,4 +103,12 @@ export interface Project {
 export interface Slider {
   msg: string
   imgs: string[]
+  logo: string
+  _id: string
+}
+
+export interface SliderPayload {
+  imgs: (FileType | string)[]
+  msg: string
+  logo: FileType | string
 }

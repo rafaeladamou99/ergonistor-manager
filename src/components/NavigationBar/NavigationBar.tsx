@@ -22,6 +22,7 @@ const NavigationBar = () => {
   const { dispatch } = useAuth()
   const pages = useMemo(
     () => [
+      Routes.SliderLogo,
       Routes.ServicesCategories,
       Routes.Services,
       Routes.Projects,
@@ -54,7 +55,7 @@ const NavigationBar = () => {
       sx={{ backgroundColor: "white" }}
       className="app-bar"
     >
-      <Container maxWidth="lg">
+      <div>
         <Toolbar
           disableGutters
           sx={{ display: "flex", justifyContent: "space-around" }}
@@ -230,7 +231,7 @@ const NavigationBar = () => {
             </Button>
           </Box>
         </Toolbar>
-      </Container>
+      </div>
     </AppBar>
   )
 }

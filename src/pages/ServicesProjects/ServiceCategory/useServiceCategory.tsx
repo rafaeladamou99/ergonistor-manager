@@ -1,4 +1,5 @@
-import React, {
+import { useFormik } from "formik"
+import {
   FormEvent,
   useCallback,
   useEffect,
@@ -6,18 +7,16 @@ import React, {
   useState
 } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import useSnackbar from "../../../snackbar/useSnackbar"
 import { v4 as uuidv4 } from "uuid"
+import * as yup from "yup"
 import useApi from "../../../api/api-service/useApiService"
+import { FileType } from "../../../components/FileUpload/FileUpload"
+import useSnackbar from "../../../snackbar/useSnackbar"
 import {
   onChangeType,
   ServiceCategory,
   ServiceCategoryPayload
 } from "../../../types/types"
-import * as yup from "yup"
-import { useFormik } from "formik"
-import { FileType } from "../../../components/FileUpload/FileUpload"
-import { Buffer as BufferPackage } from "buffer"
 
 const useServiceCategory = () => {
   const navigate = useNavigate()

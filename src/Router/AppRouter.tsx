@@ -14,6 +14,7 @@ import ProtectedRoute from "./ProtectedRoute"
 import Root from "./Root"
 import { Routes } from "./Routes"
 import ServiceCategory from "../pages/ServicesProjects/ServiceCategory/ServiceCategory"
+import SliderLogo from "../pages/SliderLogo/SliderLogo"
 
 const AppRouter = () => {
   const {
@@ -49,6 +50,10 @@ const AppRouter = () => {
         {
           element: <ProtectedRoute hasToken={!!access_token} />,
           children: [
+            {
+              path: Routes.SliderLogo.path,
+              element: <SliderLogo />
+            },
             {
               path: Routes.Contents.AddContent.path,
               element: <Content />

@@ -74,9 +74,18 @@ const FileUpload = ({
     []
   )
 
+  const slotProps = useMemo(
+    () => ({
+      inputLabel: {
+        shrink: true
+      }
+    }),
+    []
+  )
+
   return (
     <FormControl fullWidth sx={{ borderRadius: 6 }}>
-      {typeof value === "string" ? (
+      {typeof value === "string" && value ? (
         <img src={value} className="w-full" />
       ) : (
         <TextFieldMui
@@ -88,6 +97,7 @@ const FileUpload = ({
           className="bg-white"
           sx={sx}
           type="file"
+          slotProps={slotProps}
         />
       )}
       <FormHelperText error={hasError}>
