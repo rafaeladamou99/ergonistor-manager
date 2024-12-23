@@ -9,7 +9,7 @@ const useAxiosConfig = () => {
   const axiosInstance = axios.create({
     // baseURL: "http://localhost:8000",
     baseURL: "https://ergonistor-be-production.up.railway.app",
-    timeout: 10000,
+    timeout: 60000,
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json"
