@@ -222,8 +222,18 @@ const useServiceProject = (type: "service" | "project") => {
 
   useEffect(() => {
     if (getIsSuccess && getData) {
-      const { img1, img2, img3, img4, img5, paragraphs, title, category } =
-        getData
+      const {
+        img1,
+        img2,
+        img3,
+        img4,
+        img5,
+        paragraphs,
+        title,
+        category,
+        architect,
+        status
+      } = getData
       formik
         .setValues({
           img1,
@@ -233,7 +243,9 @@ const useServiceProject = (type: "service" | "project") => {
           img5,
           paragraphs,
           title,
-          category
+          category,
+          architect,
+          status
         })
         .then(() => {
           setFormId(generateFormId())
