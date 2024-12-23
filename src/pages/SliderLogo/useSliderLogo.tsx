@@ -46,7 +46,7 @@ const useSliderLogo = () => {
       ...values,
       logo: typeof values.logo === "string" ? undefined : values.logo
     }
-    sliderId ? put(values) : post(values)
+    sliderId ? put(_payload) : post(_payload)
   }
 
   const isFileType = (
