@@ -17,6 +17,7 @@ import {
   ContentResponse,
   onChangeType
 } from "../../../types/types"
+import { FileType } from "../../../components/FileUpload/FileUpload"
 
 const useContent = () => {
   const navigate = useNavigate()
@@ -91,6 +92,17 @@ const useContent = () => {
     contentId ? put(values) : post(values)
   }
 
+  const isFileType = (
+    value: FileType | string | undefined | any
+  ): value is FileType =>
+    !!(
+      typeof value !== "string" &&
+      value !== undefined &&
+      typeof value.name === "string" &&
+      Array.isArray(value.buffer) &&
+      typeof value.buffer?.[0] === "number"
+    )
+
   const validationSchema = useMemo(
     () =>
       yup.object({
@@ -106,7 +118,11 @@ const useContent = () => {
               yup.object({
                 name: yup.string().required("Name is required"),
                 position: yup.string().required("Position is required"),
-                img: yup.string().required("Image is required")
+                img: yup
+                  .mixed()
+                  .test("is-string-or-object", "Image is required", (value) => {
+                    return typeof value === "string" || isFileType(value)
+                  })
               })
             ),
             sections: yup.array().of(
@@ -297,6 +313,17 @@ const useContent = () => {
     )
   }
 
+  const onChangeImg = useCallback(
+    ({ name, value }: onChangeType<FileType>) => {
+      formik.setFieldValue(name, value)
+    },
+    [formik]
+  )
+
+  const removeImg = (imgField: string) => () => {
+    formik.setFieldValue(imgField, undefined)
+  }
+
   useEffect(() => {
     contentId && get()
   }, [contentId])
@@ -420,7 +447,9 @@ const useContent = () => {
     addSection,
     addSectionParagraph,
     onIsPrimaryChange,
-    isEdit: !!contentId
+    isEdit: !!contentId,
+    onChangeImg,
+    removeImg
   }
 }
 

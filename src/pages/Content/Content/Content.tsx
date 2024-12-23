@@ -4,6 +4,7 @@ import { FormControlLabel, Switch } from "@mui/material"
 import Button from "../../../components/Button/Button"
 import TextField from "../../../components/TextField/TextField"
 import useContent from "./useContent"
+import FileUpload from "../../../components/FileUpload/FileUpload"
 
 const Content = () => {
   const {
@@ -22,6 +23,8 @@ const Content = () => {
     removePerson,
     removeSection,
     onIsPrimaryChange,
+    onChangeImg,
+    removeImg,
     isEdit,
     formik,
     formId
@@ -226,10 +229,10 @@ const Content = () => {
                   }
                   value={person.position}
                 />
-                <TextField
-                  name={`content.about.key_people[${index}].img`}
-                  onChange={onChangeString}
+                <FileUpload
                   label="Image"
+                  onChange={onChangeImg}
+                  name={`content.about.key_people[${index}].img`}
                   hasError={
                     hasTypePeople(formik.errors.content?.about?.key_people) &&
                     !!formik.errors.content?.about?.key_people?.[index]?.img &&
@@ -242,6 +245,16 @@ const Content = () => {
                   }
                   value={person.img}
                 />
+                {typeof formik.values.content.about.key_people[index].img ===
+                  "string" && (
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    onClick={removeImg(
+                      `content.about.key_people[${index}].img`
+                    )}
+                    className="cursor-pointer hover:text-red-700"
+                  />
+                )}
               </div>
             ))}
             <Button label="Add Person" onClick={addPerson} />

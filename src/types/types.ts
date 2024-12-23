@@ -30,7 +30,7 @@ export interface IContent {
     key_people: {
       name: string
       position: string
-      img: string
+      img: undefined | FileType | string
     }[]
   }
   faq: {
