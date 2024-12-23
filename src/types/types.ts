@@ -110,5 +110,5 @@ export interface Slider {
 export interface SliderPayload {
   imgs: (FileType | string)[]
   msg: string
-  logo: FileType | string
+  logo: FileType | string | undefined
 }

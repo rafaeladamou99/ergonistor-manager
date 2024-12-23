@@ -35,13 +35,17 @@ const useSliderLogo = () => {
   const initialValues = useMemo(
     (): SliderPayload => ({
       imgs: Array(10).fill(""),
-      logo: "",
+      logo: undefined,
       msg: ""
     }),
     []
   )
 
   const onSubmitFormik = (values: SliderPayload) => {
+    const _payload = {
+      ...values,
+      logo: typeof values.logo === "string" ? undefined : values.logo
+    }
     sliderId ? put(values) : post(values)
   }
 
