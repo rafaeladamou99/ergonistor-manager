@@ -83,7 +83,6 @@ export interface ServiceProjectPayload {
 
 export interface ServiceCategoryPayload {
   title: string
-  description: string
   img: undefined | FileType | string
 }
 

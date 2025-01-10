@@ -52,18 +52,6 @@ const ServiceCategory = () => {
               />
             )}
           </div>
-          <div className="flex gap-2 items-center">
-            <TextField
-              name="description"
-              onChange={onChangeString}
-              label="Description"
-              hasError={
-                !!formik.errors.description && formik.touched.description
-              }
-              errorMsg={formik.errors.description}
-              value={formik.values.description}
-            />
-          </div>
         </div>
         <Button label="Save" isSubmit isLoading={isLoading} />
       </form>

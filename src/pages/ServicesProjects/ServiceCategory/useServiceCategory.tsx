@@ -1,11 +1,5 @@
 import { useFormik } from "formik"
-import {
-  FormEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState
-} from "react"
+import { FormEvent, useCallback, useEffect, useMemo, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { v4 as uuidv4 } from "uuid"
 import * as yup from "yup"
@@ -49,7 +43,6 @@ const useServiceCategory = () => {
   const initialValues = useMemo(
     (): ServiceCategoryPayload => ({
       img: undefined,
-      description: "",
       title: ""
     }),
     []
@@ -77,7 +70,6 @@ const useServiceCategory = () => {
   const validationSchema = useMemo(
     () =>
       yup.object({
-        description: yup.string().required("Paragraph is required"),
         img: yup
           .mixed()
           .test("is-string-or-object", "Image is required", (value) => {
@@ -118,11 +110,10 @@ const useServiceCategory = () => {
 
   useEffect(() => {
     if (getIsSuccess && getData) {
-      const { img, description, title } = getData
+      const { img, title } = getData
       formik
         .setValues({
           img,
-          description,
           title
         })
         .then(() => {
