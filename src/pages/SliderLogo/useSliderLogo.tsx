@@ -34,7 +34,7 @@ const useSliderLogo = () => {
 
   const initialValues = useMemo(
     (): SliderPayload => ({
-      imgs: Array(10).fill(""),
+      imgs: Array(15).fill(""),
       logo: undefined,
       msg: ""
     }),
@@ -122,8 +122,8 @@ const useSliderLogo = () => {
       formik
         .setValues({
           imgs:
-            imgs.length < 10
-              ? imgs.concat(Array(10 - imgs.length).fill(""))
+            imgs.length < 15
+              ? imgs.concat(Array(15 - imgs.length).fill(""))
               : imgs,
           logo,
           msg
