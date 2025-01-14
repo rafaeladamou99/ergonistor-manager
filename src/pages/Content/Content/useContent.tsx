@@ -381,8 +381,8 @@ const useContent = () => {
                 value: contact.telephone.value
               },
               linkedin: {
-                msg: contact.linkedin.msg,
-                value: contact.linkedin.value
+                msg: contact.linkedin?.msg ?? "",
+                value: contact.linkedin?.value ?? ""
               }
             },
             faq: {
@@ -407,7 +407,7 @@ const useContent = () => {
               subtitle: services.subtitle,
               msg: services.msg
             },
-            copyrightMsg
+            copyrightMsg: copyrightMsg ?? ""
           },
           content_title: getData.content_title,
           is_primary: getData.is_primary
