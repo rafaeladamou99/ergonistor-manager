@@ -338,6 +338,31 @@ const Content = () => {
                 value={formik.values.content.contact.telephone?.msg}
               />
             </div>
+            <div className="flex flex-col gap-2 w-full md:w-10/12">
+              <span className="text-xl">Linkedin</span>
+              <TextField
+                name="content.contact.linkedin.value"
+                onChange={onChangeString}
+                label="Linkedin"
+                hasError={
+                  !!formik.errors.content?.contact?.linkedin?.value &&
+                  formik.touched.content?.contact?.linkedin?.value
+                }
+                errorMsg={formik.errors.content?.contact?.linkedin?.value}
+                value={formik.values.content.contact.linkedin?.value}
+              />
+              <TextField
+                name="content.contact.linkedin.msg"
+                onChange={onChangeString}
+                label="Linkedin Message"
+                hasError={
+                  !!formik.errors.content?.contact?.linkedin?.msg &&
+                  formik.touched.content?.contact?.linkedin?.msg
+                }
+                errorMsg={formik.errors.content?.contact?.linkedin?.msg}
+                value={formik.values.content.contact.linkedin?.msg}
+              />
+            </div>
           </div>
         </div>
 
@@ -517,6 +542,23 @@ const Content = () => {
             }
             errorMsg={formik.errors.content?.services?.msg}
             value={formik.values.content.services.msg}
+          />
+        </div>
+        <div
+          className="flex flex-col gap-4 w-full md:w-10/12 md:max-w-[1200px]"
+          key="copyright"
+        >
+          <span className="text-2xl">Copyright Message</span>
+          <TextField
+            name="content.copyrightMsg"
+            onChange={onChangeString}
+            label="Title"
+            hasError={
+              !!formik.errors.content?.copyrightMsg &&
+              formik.touched.content?.copyrightMsg
+            }
+            errorMsg={formik.errors.content?.copyrightMsg}
+            value={formik.values.content.copyrightMsg}
           />
         </div>
         <FormControlLabel

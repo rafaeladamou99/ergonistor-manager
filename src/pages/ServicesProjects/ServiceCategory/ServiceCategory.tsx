@@ -25,7 +25,7 @@ const ServiceCategory = () => {
       >
         <div
           className="flex flex-col gap-4 w-full md:w-10/12 md:max-w-[1200px]"
-          key="home"
+          key="service-category"
         >
           <TextField
             name="title"

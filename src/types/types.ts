@@ -6,6 +6,7 @@ export interface onChangeType<T> {
 }
 
 export interface IContent {
+  copyrightMsg: string
   home: {
     title: string
     msg: string
@@ -46,6 +47,7 @@ export interface IContent {
     msg: string
     telephone: ContactMedium
     email: ContactMedium
+    linkedin: ContactMedium
   }
 }
 

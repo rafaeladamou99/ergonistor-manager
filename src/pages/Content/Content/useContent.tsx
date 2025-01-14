@@ -44,6 +44,7 @@ const useContent = () => {
   const initialValues = useMemo(
     (): ContentPayload => ({
       content: {
+        copyrightMsg: "",
         home: {
           title: "",
           msg: ""
@@ -61,6 +62,10 @@ const useContent = () => {
           },
           msg: "",
           telephone: {
+            msg: "",
+            value: ""
+          },
+          linkedin: {
             msg: "",
             value: ""
           },
@@ -107,6 +112,7 @@ const useContent = () => {
     () =>
       yup.object({
         content: yup.object({
+          copyrightMsg: yup.string().required("Copyright msg is required"),
           home: yup.object({
             title: yup.string().required("Title is required"),
             msg: yup.string().required("Message is required")
@@ -143,6 +149,10 @@ const useContent = () => {
             telephone: yup.object({
               msg: yup.string().required("Telephone message is required"),
               value: yup.string().required("Telephone is required")
+            }),
+            linkedin: yup.object({
+              msg: yup.string().required("Linkedin message is required"),
+              value: yup.string().required("Linkedin is required")
             }),
             title: yup.string().required("Title is required")
           }),
@@ -344,7 +354,8 @@ const useContent = () => {
 
   useEffect(() => {
     if (getIsSuccess && getData) {
-      const { about, contact, faq, home, projects, services } = getData.content
+      const { about, contact, faq, home, projects, services, copyrightMsg } =
+        getData.content
       formik
         .setValues({
           content: {
@@ -368,6 +379,10 @@ const useContent = () => {
               telephone: {
                 msg: contact.telephone.msg,
                 value: contact.telephone.value
+              },
+              linkedin: {
+                msg: contact.linkedin.msg,
+                value: contact.linkedin.value
               }
             },
             faq: {
@@ -391,7 +406,8 @@ const useContent = () => {
               title: services.title,
               subtitle: services.subtitle,
               msg: services.msg
-            }
+            },
+            copyrightMsg
           },
           content_title: getData.content_title,
           is_primary: getData.is_primary
