@@ -42,18 +42,13 @@ const useServiceCategory = () => {
 
   const initialValues = useMemo(
     (): ServiceCategoryPayload => ({
-      img: undefined,
       title: ""
     }),
     []
   )
 
   const onSubmitFormik = (values: ServiceCategoryPayload) => {
-    const _values = {
-      ...values,
-      img: isFileType(values.img) ? values.img : undefined
-    }
-    serviceCategoryId ? put(_values) : post(_values)
+    serviceCategoryId ? put(values) : post(values)
   }
 
   const isFileType = (
@@ -70,11 +65,6 @@ const useServiceCategory = () => {
   const validationSchema = useMemo(
     () =>
       yup.object({
-        img: yup
-          .mixed()
-          .test("is-string-or-object", "Image is required", (value) => {
-            return typeof value === "string" || isFileType(value)
-          }),
         title: yup.string().required("Title is required")
       }),
     []
@@ -92,28 +82,17 @@ const useServiceCategory = () => {
     },
     [formik]
   )
-  const onChangeImg = useCallback(
-    ({ name, value }: onChangeType<FileType>) => {
-      formik.setFieldValue(name, value)
-    },
-    [formik]
-  )
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     formik.submitForm()
   }
 
-  const removeImg = () => {
-    formik.setFieldValue("img", undefined)
-  }
-
   useEffect(() => {
     if (getIsSuccess && getData) {
-      const { img, title } = getData
+      const { title } = getData
       formik
         .setValues({
-          img,
           title
         })
         .then(() => {
@@ -160,8 +139,6 @@ const useServiceCategory = () => {
     formik,
     onChangeString,
     onSubmit,
-    onChangeImg,
-    removeImg,
     isLoading
   }
 }

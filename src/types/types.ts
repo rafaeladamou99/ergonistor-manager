@@ -85,7 +85,6 @@ export interface ServiceProjectPayload {
 
 export interface ServiceCategoryPayload {
   title: string
-  img: undefined | FileType | string
 }
 
 export interface ServiceCategory extends ServiceCategoryPayload {
