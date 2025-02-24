@@ -1,5 +1,11 @@
 import { useEffect, useMemo } from "react"
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+  useLocation,
+  useNavigate
+} from "react-router-dom"
 import { useAuth } from "../auth/useAuth"
 import Content from "../pages/Content/Content/Content"
 import Contents from "../pages/Content/Contents"
@@ -17,6 +23,9 @@ import ServiceCategory from "../pages/ServicesProjects/ServiceCategory/ServiceCa
 import SliderLogo from "../pages/SliderLogo/SliderLogo"
 
 const AppRouter = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const isOnLoginPage = location.pathname === "/login"
   const {
     dispatch,
     state: { access_token }
@@ -33,6 +42,12 @@ const AppRouter = () => {
       })
     }
   }, [localStorage?.access_token])
+
+  useEffect(() => {
+    if (access_token && isOnLoginPage) {
+      navigate("/")
+    }
+  }, [access_token, isOnLoginPage])
 
   const router = createBrowserRouter([
     {
@@ -114,7 +129,7 @@ const AppRouter = () => {
     }
   ])
 
-  return <RouterProvider router={router} key={access_token} />
+  return <RouterProvider router={router} />
 }
 
 export default AppRouter
