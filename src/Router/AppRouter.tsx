@@ -1,31 +1,21 @@
-import { useEffect, useMemo } from "react"
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-  useLocation,
-  useNavigate
-} from "react-router-dom"
+import { useEffect } from "react"
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
 import { useAuth } from "../auth/useAuth"
 import Content from "../pages/Content/Content/Content"
 import Contents from "../pages/Content/Contents"
 import Error from "../pages/Error/Error"
-import Home from "../pages/Home/Home"
 import Login from "../pages/Login/Login"
 import Register from "../pages/Register/Register"
+import ServiceCategory from "../pages/ServicesProjects/ServiceCategory/ServiceCategory"
 import ServiceProject from "../pages/ServicesProjects/ServiceProject/ServiceProject"
 import ServicesProjects from "../pages/ServicesProjects/ServicesProjects"
+import SliderLogo from "../pages/SliderLogo/SliderLogo"
 import InverseProtectedRoute from "./InverseProtectedRoute"
 import ProtectedRoute from "./ProtectedRoute"
 import Root from "./Root"
 import { Routes } from "./Routes"
-import ServiceCategory from "../pages/ServicesProjects/ServiceCategory/ServiceCategory"
-import SliderLogo from "../pages/SliderLogo/SliderLogo"
 
 const AppRouter = () => {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const isOnLoginPage = location.pathname === "/login"
   const {
     dispatch,
     state: { access_token }
@@ -42,12 +32,6 @@ const AppRouter = () => {
       })
     }
   }, [localStorage?.access_token])
-
-  useEffect(() => {
-    if (access_token && isOnLoginPage) {
-      navigate("/")
-    }
-  }, [access_token, isOnLoginPage])
 
   const router = createBrowserRouter([
     {
