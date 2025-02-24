@@ -43,7 +43,11 @@ const AppRouter = () => {
           element: <InverseProtectedRoute hasToken={!!access_token} />,
           children: [
             { path: Routes.Login.path, element: <Login /> },
-            { path: Routes.Register.path, element: <Register /> }
+            { path: Routes.Register.path, element: <Register /> },
+            {
+              path: "/",
+              element: <Navigate to={Routes.Login.path} />
+            }
           ]
         },
         {
