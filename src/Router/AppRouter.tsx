@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
 import { useAuth } from "../auth/useAuth"
 import Content from "../pages/Content/Content/Content"
@@ -34,85 +34,91 @@ const AppRouter = () => {
     }
   }, [localStorage?.access_token])
 
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Root hasToken={!!access_token} />,
-      errorElement: <Error />,
-      children: [
+  const router = useMemo(
+    () =>
+      createBrowserRouter([
         {
-          element: <InverseProtectedRoute hasToken={!!access_token} />,
-          children: [
-            { path: Routes.Login.path, element: <Login /> },
-            { path: Routes.Register.path, element: <Register /> }
-          ]
-        },
-        {
-          element: <ProtectedRoute hasToken={!!access_token} />,
+          path: "/",
+          element: <Root hasToken={!!access_token} />,
+          errorElement: <Error />,
           children: [
             {
-              path: Routes.SliderLogo.path,
-              element: <SliderLogo />
+              element: <InverseProtectedRoute hasToken={!!access_token} />,
+              children: [
+                { path: Routes.Login.path, element: <Login /> },
+                { path: Routes.Register.path, element: <Register /> }
+              ]
             },
             {
-              path: Routes.Contents.AddContent.path,
-              element: <Content />
-            },
-            {
-              path: Routes.Contents.EditContent.routerPath,
-              element: <Content />
-            },
-            { path: Routes.Contents.path, element: <Contents /> },
-            {
-              path: Routes.Services.path,
-              element: <ServicesProjects key="service" type="service" />
-            },
-            {
-              path: Routes.Services.AddService.path,
-              element: <ServiceProject key="service" type="service" />
-            },
-            {
-              path: Routes.Services.EditService.routerPath,
-              element: <ServiceProject key="service" type="service" />
-            },
-            {
-              path: Routes.Projects.path,
-              element: <ServicesProjects key="project" type="project" />
-            },
-            {
-              path: Routes.Projects.AddProject.path,
-              element: <ServiceProject key="project" type="project" />
-            },
-            {
-              path: Routes.Projects.EditProject.routerPath,
-              element: <ServiceProject key="project" type="project" />
-            },
-            {
-              path: Routes.ServicesCategories.path,
-              element: (
-                <ServicesProjects
-                  key="service-categories"
-                  type="service-categories"
-                />
-              )
-            },
-            {
-              path: Routes.ServicesCategories.AddServiceCategory.path,
-              element: <ServiceCategory key="service-categories" />
-            },
-            {
-              path: Routes.ServicesCategories.EditServiceCategory.routerPath,
-              element: <ServiceCategory key="service-categories" />
-            },
-            {
-              path: "/",
-              element: <Navigate to={Routes.Contents.path} />
+              element: <ProtectedRoute hasToken={!!access_token} />,
+              children: [
+                {
+                  path: Routes.SliderLogo.path,
+                  element: <SliderLogo />
+                },
+                {
+                  path: Routes.Contents.AddContent.path,
+                  element: <Content />
+                },
+                {
+                  path: Routes.Contents.EditContent.routerPath,
+                  element: <Content />
+                },
+                { path: Routes.Contents.path, element: <Contents /> },
+                {
+                  path: Routes.Services.path,
+                  element: <ServicesProjects key="service" type="service" />
+                },
+                {
+                  path: Routes.Services.AddService.path,
+                  element: <ServiceProject key="service" type="service" />
+                },
+                {
+                  path: Routes.Services.EditService.routerPath,
+                  element: <ServiceProject key="service" type="service" />
+                },
+                {
+                  path: Routes.Projects.path,
+                  element: <ServicesProjects key="project" type="project" />
+                },
+                {
+                  path: Routes.Projects.AddProject.path,
+                  element: <ServiceProject key="project" type="project" />
+                },
+                {
+                  path: Routes.Projects.EditProject.routerPath,
+                  element: <ServiceProject key="project" type="project" />
+                },
+                {
+                  path: Routes.ServicesCategories.path,
+                  element: (
+                    <ServicesProjects
+                      key="service-categories"
+                      type="service-categories"
+                    />
+                  )
+                },
+                {
+                  path: Routes.ServicesCategories.AddServiceCategory.path,
+                  element: <ServiceCategory key="service-categories" />
+                },
+                {
+                  path: Routes.ServicesCategories.EditServiceCategory
+                    .routerPath,
+                  element: <ServiceCategory key="service-categories" />
+                },
+                {
+                  path: "/",
+                  element: <Navigate to={Routes.Contents.path} />
+                }
+              ]
             }
           ]
         }
-      ]
-    }
-  ])
+      ]),
+    [access_token]
+  )
+
   return <RouterProvider router={router} />
 }
 
