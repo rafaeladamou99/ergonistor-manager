@@ -10,6 +10,7 @@ export interface IContent {
   home: {
     title: string
     msg: string
+    msg2: string
   }
   services: {
     title: string

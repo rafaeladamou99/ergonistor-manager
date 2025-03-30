@@ -79,6 +79,17 @@ const Content = () => {
             errorMsg={formik.errors.content?.home?.msg}
             value={formik.values.content.home.msg}
           />
+          <TextField
+            name="content.home.msg2"
+            onChange={onChangeString}
+            label="Message 2"
+            hasError={
+              !!formik.errors.content?.home?.msg2 &&
+              formik.touched.content?.home?.msg2
+            }
+            errorMsg={formik.errors.content?.home?.msg2}
+            value={formik.values.content.home.msg2}
+          />
         </div>
         <div
           className="flex flex-col gap-4 w-full md:w-10/12 md:max-w-[1200px]"
