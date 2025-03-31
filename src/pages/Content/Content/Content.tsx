@@ -69,6 +69,17 @@ const Content = () => {
             value={formik.values.content.home.title}
           />
           <TextField
+            name="content.home.subtitle"
+            onChange={onChangeString}
+            label="Subtitle"
+            hasError={
+              !!formik.errors.content?.home?.subtitle &&
+              formik.touched.content?.home?.subtitle
+            }
+            errorMsg={formik.errors.content?.home?.subtitle}
+            value={formik.values.content.home.subtitle}
+          />
+          <TextField
             name="content.home.msg"
             onChange={onChangeString}
             label="Message"

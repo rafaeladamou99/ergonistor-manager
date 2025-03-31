@@ -47,6 +47,7 @@ const useContent = () => {
         copyrightMsg: "",
         home: {
           title: "",
+          subtitle: "",
           msg: "",
           msg2: ""
         },
@@ -116,6 +117,7 @@ const useContent = () => {
           copyrightMsg: yup.string().required("Copyright msg is required"),
           home: yup.object({
             title: yup.string().required("Title is required"),
+            subtitle: yup.string().required("Subitle is required"),
             msg: yup.string().required("Message is required"),
             msg2: yup.string().required("Message is required"),
           }),
@@ -397,6 +399,7 @@ const useContent = () => {
             },
             home: {
               title: home.title,
+              subtitle: home.subtitle,
               msg: home.msg,
               msg2: home.msg2
             },
