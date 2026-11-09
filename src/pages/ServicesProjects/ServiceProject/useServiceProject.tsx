@@ -97,7 +97,11 @@ const useServiceProject = (type: "service" | "project") => {
         img1: yup
           .mixed()
           .test("is-string-or-object", "Image is required", (value) => {
-            return typeof value === "string" || isFileType(value)
+            return (
+              type !== "project" ||
+              typeof value === "string" ||
+              isFileType(value)
+            )
           }),
         img2: yup
           .mixed()
